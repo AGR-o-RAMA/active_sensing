@@ -6,7 +6,7 @@
     "correlation_types": ["equal", "biased", "adaptive"],
     "n_steps": 100,
     "iters": 1,
-    "error_margins": [0.3, 0.1, 0.05],
+    "error_margins": ["None", 0.3, 0.1, 0.05],
     "enable_plotting": true,
     "enable_logging": true,
     "project_path": "/home/bota/Desktop/active_sensing/"

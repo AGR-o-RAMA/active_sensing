@@ -104,7 +104,8 @@ def main():
     correlation_types = config["correlation_types"]
     n_steps = config["n_steps"]
     iters = config["iters"]
-    error_margins = config["error_margins"]
+    error_margins = [None if e == "None" else e for e in config["error_margins"]]
+
     if action_strategy == "sweep":
         error_margins = [None]
         iters = 1
