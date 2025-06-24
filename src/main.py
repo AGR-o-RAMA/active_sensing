@@ -40,7 +40,10 @@ def load_global_paths(config):
     """
     PROJECT_PATH = config["project_path"].rstrip("/")  # Ensure no trailing slash
     ANNOTATION_PATH = os.path.join(PROJECT_PATH, "data", "annotation.txt")
-    ORTHOMAP_PATH = "/media/bota/BOTA/wheat/example-run-001_20241014T1739_ortho_dsm.tif"
+    ORTHOMAP_PATH = os.path.join(
+        PROJECT_PATH, "data", "example-run-001_20241014T1739_ortho_dsm.tif"
+    )
+
     TILE_PIXEL_PATH = os.path.join(PROJECT_PATH, "data", "tiles_to_pixels.txt")
     MODEL_PATH = os.path.join(
         PROJECT_PATH,
