@@ -43,8 +43,10 @@ The simulation is controlled by a configuration file (`config.json`). Below are 
 - **`project_path`**: Absolute path to the project directory.  
 
 ### Preparing the Orthomap (for Real-World Data)
-If using `"field_type": "Ortomap"`, the required orthomap dataset (1.4GB) must be placed in the `data/` directory. The download link will be provided later.
+If using `"field_type": "Ortomap"`, the required orthomap dataset (1.4GB) must be placed in the `data/` directory. Download from a google drive HERE [Link](https://drive.google.com/file/d/1d9FVHkUeA00cmQz5y3VNUeHnSA6un7h9/view?usp=drive_link)
+
 ![Orthomap](plots/ortomap_highres.png)  
+
 
 
 ---
