@@ -120,13 +120,4 @@ This repository contains research work in progress and is **not yet publicly rel
 
 If you are interested in collaborating or using this work for research purposes, please **contact the project authors** before proceeding.  
 
-## Acknowledgements
 
-This work builds upon prior research in **Informative Path Planning (IPP)** developed within our research group under the supervision of Dr. Trianni. In particular, the IPP module in this framework is adapted from:
-
-> Pierdicca, L., Ognibene, D., Trianni, V.: Multi-uav active sensing for precision agriculture via bayesian fusion. In: 2024 IEEE 20th International Conference on Automation Science and Engineering (CASE). pp. 605–611. IEEE (2024) 
-> [Paper](https://github.com/AGR-o-RAMA/active_sensing/blob/main/UAV_active_monitoring-2.pdf)   [Code](https://github.com/lucapierdicca/Precision-Agriculture-Dev/)
-
-We acknowledge the use of concepts and selected implementations from this work, and have reused and adapted certain components.
-
-Our contribution focuses on integrating a **realistic sensor model**—via a deep learning-based wheat lodging classifier—and advancing the pipeline toward **field-ready deployment** in precision agriculture.
