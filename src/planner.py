@@ -126,8 +126,14 @@ class MCTS:
         Returns:
             Compressed representation suitable for state comparison
         """
-        # Use spatial downsampling - take every 4th cell in each dimension
-        step = 4
+        # Use more aggressive spatial downsampling for better performance
+        # For large grids, sample even more sparsely
+        rows, cols = belief_map.shape[:2]
+        if rows > 200 or cols > 200:
+            step = 8  # More aggressive for large grids
+        else:
+            step = 4  # Standard for smaller grids
+        
         compressed = belief_map[::step, ::step, 1]  # Only keep P(m=1)
         return compressed
     
@@ -317,9 +323,20 @@ class planning:
         self.optimal_altitude = optimal_alt
         self.sweep_direction = None
         
-        # MCTS parameters
-        self.mcts_depth = mcts_depth
-        self.mcts_iterations = mcts_iterations
+        # MCTS parameters - adjust defaults based on grid size
+        grid_size = grid_info.shape[0] * grid_info.shape[1]
+        if grid_size > 100000:  # Large grids (e.g., 400x400)
+            default_depth = 8
+            default_iterations = 500
+        elif grid_size > 10000:  # Medium grids (e.g., 100x100)
+            default_depth = 10
+            default_iterations = 1000
+        else:  # Small grids
+            default_depth = 12
+            default_iterations = 1500
+            
+        self.mcts_depth = mcts_depth if mcts_depth != 10 else default_depth
+        self.mcts_iterations = mcts_iterations if mcts_iterations != 1000 else default_iterations
         self.mcts_exploration = mcts_exploration
         self.mcts = None  # Will be initialized when needed
 
