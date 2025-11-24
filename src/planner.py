@@ -1,10 +1,11 @@
-import random
 import numpy as np
 from helper import uav_position
 
 
 class planning:
-    def __init__(self, grid_info, uav, strategy, conf_dict=None, optimal_alt=21.6):
+    def __init__(
+        self, grid_info, uav, strategy, conf_dict=None, optimal_alt=21.6, seed=None
+    ):
         # Initialize belief map (each cell has a default probability of 0.5) and set UAV planning parameters
         self.M = np.full((grid_info.shape[0], grid_info.shape[1], 2), 0.5)
         self.uav = uav
@@ -13,6 +14,10 @@ class planning:
         self.conf_dict = conf_dict
         self.optimal_altitude = optimal_alt
         self.sweep_direction = None
+        if seed is not None:
+            self.rng = np.random.default_rng(seed)
+        else:
+            self.rng = np.random.default_rng()
 
     def reset(self, conf_dict=None):
         """Reset UAV and planning state, and reinitialize the belief map."""
@@ -130,7 +135,7 @@ class planning:
                     else "BackFront"
                 )
             else:
-                self.sweep_direction = random.choice(["LeftRight", "BackFront"])
+                self.sweep_direction = self.rng.choice(["LeftRight", "BackFront"])
 
         # self.sweep_direction = "LeftRight"
         if self.sweep_direction == "LeftRight":
@@ -180,12 +185,15 @@ class planning:
         # Find the maximum information gain
         max_gain = max(info_gain_action.values())
 
-        # Collect actions with the maximum info gain
+        eps = 1e-4
+        # Collect actions with the maximum info gain + eps tolerance
         max_gain_actions = [
-            action for action, gain in info_gain_action.items() if gain == max_gain
+            action
+            for action, gain in info_gain_action.items()
+            if gain >= max_gain - eps
         ]
 
-        next_action = random.choice(max_gain_actions)
+        next_action = self.rng.choice(max_gain_actions)
         # Update previous action for the next step
         self.last_action = next_action
         return next_action, info_gain_action
